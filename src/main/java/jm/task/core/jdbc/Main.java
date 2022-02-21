@@ -1,5 +1,6 @@
 package jm.task.core.jdbc;
 
+import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserServiceImpl;
 import jm.task.core.jdbc.util.Util;
 
@@ -18,29 +19,29 @@ import java.util.List;
  */
 
 public class Main {
+
     public static void main(String[] args) {
 
         UserServiceImpl sqlWork = new UserServiceImpl();
+
+        sqlWork.dropUsersTable(); // потом удалить эту сточку
+
+        User user1 = new User("Masha", "Ivanova", (byte) 10);
+        User user2 = new User("Sonya", "Starova", (byte) 20);
+        User user3 = new User("Lesha", "Shem", (byte) 15);
+        User user4 = new User("Pasha", "Svoi", (byte) 25);
+
         sqlWork.createUsersTable();
+        sqlWork.saveUser(user1.getName(), user1.getLastName(), user1.getAge());
+        sqlWork.saveUser(user2.getName(), user2.getLastName(), user2.getAge());
+        sqlWork.saveUser(user3.getName(), user3.getLastName(), user3.getAge());
+        sqlWork.saveUser(user4.getName(), user4.getLastName(), user4.getAge());
 
-//        try {
-//            String sql = "INSERT INTO test.Users (id, name, lastName, age) VALUES (?, ?, ?, ?)";
-//            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//            String name1 = "Lesha";
-//            preparedStatement.setInt(1, 1);
-//            preparedStatement.setString(2, name1);
-//            preparedStatement.setString(3, "retyuiop");
-//            preparedStatement.setByte(4, (byte) 1);
-//            preparedStatement.executeUpdate();
-//            System.out.println("User с именем " + name1 + " добавлен в базу данных");
-//
-////            statement.executeUpdate("DROP TABLE test.Users");
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+        sqlWork.getAllUsers();
 
+        sqlWork.dropUsersTable();
 
+//        User user = new User(name, lastName, age);
 
     }
 }
