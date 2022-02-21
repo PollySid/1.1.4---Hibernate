@@ -6,8 +6,10 @@ import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
     public UserDaoJDBCImpl() {
-
+        // остаётся пустой
     }
+
+                // здесь должна быть обработка всех исключений,связанных с работой с базой данных
 
     public void createUsersTable() {
 
