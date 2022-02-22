@@ -2,10 +2,7 @@ package jm.task.core.jdbc;
 
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserServiceImpl;
-import jm.task.core.jdbc.util.Util;
 
-import java.lang.reflect.InvocationTargetException;
-import java.sql.*;
 import java.util.List;
 
 /*
@@ -24,24 +21,23 @@ public class Main {
 
         UserServiceImpl sqlWork = new UserServiceImpl();
 
-        sqlWork.dropUsersTable(); // потом удалить эту сточку
-
         User user1 = new User("Masha", "Ivanova", (byte) 10);
         User user2 = new User("Sonya", "Starova", (byte) 20);
         User user3 = new User("Lesha", "Shem", (byte) 15);
         User user4 = new User("Pasha", "Svoi", (byte) 25);
 
-        sqlWork.createUsersTable();
+        sqlWork.createUsersTable(); // Создание таблицы User(ов)
+        // Добавление 4 User(ов) в таблицу с данными
         sqlWork.saveUser(user1.getName(), user1.getLastName(), user1.getAge());
         sqlWork.saveUser(user2.getName(), user2.getLastName(), user2.getAge());
         sqlWork.saveUser(user3.getName(), user3.getLastName(), user3.getAge());
         sqlWork.saveUser(user4.getName(), user4.getLastName(), user4.getAge());
 
-        sqlWork.getAllUsers();
+        List<User> users = sqlWork.getAllUsers(); // Получение всех User из базы
+        System.out.println(users.toString()); // и вывод в консоль
 
-        sqlWork.dropUsersTable();
-
-//        User user = new User(name, lastName, age);
+        sqlWork.cleanUsersTable(); // Очистка таблицы User(ов)
+        sqlWork.dropUsersTable(); // Удаление таблицы
 
     }
 }
